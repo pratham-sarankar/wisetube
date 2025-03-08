@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wisetube/core/routes/app_routes.dart';
 import 'package:wisetube/features/result/presentation/bloc/result_bloc.dart';
 import 'package:wisetube/features/result/presentation/widgets/video_card.dart';
 
@@ -49,7 +50,17 @@ class _ResultPageState extends State<ResultPage> {
                         physics: const ClampingScrollPhysics(),
                         itemCount: videos.length,
                         itemBuilder: (context, index) {
-                          return VideoCard(video: videos[index]);
+                          final video = videos[index];
+                          return VideoCard(
+                            video: video,
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutes.player,
+                                arguments: video.videoId,
+                              );
+                            },
+                          );
                         },
                       ),
                     ),
