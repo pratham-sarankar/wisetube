@@ -57,7 +57,7 @@ class _ResultPageState extends State<ResultPage> {
                               Navigator.pushNamed(
                                 context,
                                 AppRoutes.player,
-                                arguments: video.videoId,
+                                arguments: video,
                               );
                             },
                           );
