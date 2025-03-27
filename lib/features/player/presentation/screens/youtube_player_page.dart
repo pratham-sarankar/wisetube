@@ -48,7 +48,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 12.0, horizontal: 16.0),
                               child: Text(
-                                video.title!,
+                                video.title ?? 'No Title',
                                 style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.width * 0.055,
@@ -77,7 +77,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                                   ),
                                   const SizedBox(width: 12),
                                   Text(
-                                    video.uploadDate!,
+                                    video.uploadDate ?? 'No Date',
                                     style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.width *
@@ -109,7 +109,8 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                                       image: DecorationImage(
                                         image: NetworkImage(
                                           video.thumbnails!.first.url
-                                              .toString(),
+                                                  .toString() ??
+                                              'No Image',
                                         ),
                                         fit: BoxFit.cover,
                                       ),
@@ -121,7 +122,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                                   // Channel Name
                                   Expanded(
                                     child: Text(
-                                      video.channelName!,
+                                      video.channelName ?? 'No Channel',
                                       style: TextStyle(
                                         fontSize:
                                             MediaQuery.of(context).size.width *
@@ -164,8 +165,27 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
   }
 
   void _initializePlayer() {
-    video = ModalRoute.of(context)?.settings.arguments as Video;
-    _controller = YoutubePlayerController(initialVideoId: video.videoId!);
+    // video = ModalRoute.of(context)?.settings.arguments as Video;
+    // _controller = YoutubePlayerController(initialVideoId: video.videoId!);
+
+    try {
+      final args = ModalRoute.of(context)?.settings.arguments;
+      if (args is! Video) {
+        throw ArgumentError(
+            'Expected Video object but got ${args.runtimeType}');
+      }
+      video = args;
+      if (video.videoId == null) {
+        throw ArgumentError('Video ID cannot be null');
+      }
+      _controller = YoutubePlayerController(initialVideoId: video.videoId!);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load video: ${e.toString()}')),
+      );
+      Navigator.pop(context);
+      return;
+    }
     setState(() {});
   }
 }
