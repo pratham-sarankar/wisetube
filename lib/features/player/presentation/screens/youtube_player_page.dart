@@ -108,7 +108,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                                       ),
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                          video.thumbnails!.first.url
+                                          video.thumbnails?.first.url
                                                   .toString() ??
                                               'No Image',
                                         ),
