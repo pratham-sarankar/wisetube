@@ -57,13 +57,10 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                               child: Text(
                                 video.title ?? 'No Title',
                                 style: textTheme.titleLarge?.copyWith(
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.black
-                                      : Colors.white,
+                                  color: colorScheme.onSurface,
                                   fontWeight: FontWeight.w600,
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.045,
+                                      MediaQuery.sizeOf(context).width * 0.045,
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -78,13 +75,10 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                                   Text(
                                     video.views!,
                                     style: textTheme.bodyMedium?.copyWith(
-                                      color: Theme.of(context).brightness ==
-                                              Brightness.light
-                                          ? Colors.black87
-                                          : Colors.grey[400],
+                                      color: colorScheme.onSurfaceVariant,
                                       fontWeight: FontWeight.w500,
                                       fontSize:
-                                          MediaQuery.of(context).size.width *
+                                          MediaQuery.sizeOf(context).width *
                                               0.035,
                                     ),
                                   ),
@@ -92,13 +86,10 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                                   Text(
                                     video.uploadDate ?? 'No Date',
                                     style: textTheme.bodyMedium?.copyWith(
-                                      color: Theme.of(context).brightness ==
-                                              Brightness.light
-                                          ? Colors.black87
-                                          : Colors.grey[400],
+                                      color: colorScheme.onSurfaceVariant,
                                       fontWeight: FontWeight.w500,
                                       fontSize:
-                                          MediaQuery.of(context).size.width *
+                                          MediaQuery.sizeOf(context).width *
                                               0.035,
                                     ),
                                   ),
@@ -119,10 +110,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? Colors.grey[300]!
-                                            : Colors.white30,
+                                        color: colorScheme.outline,
                                         width: 2,
                                       ),
                                       image: DecorationImage(
@@ -143,13 +131,10 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                                     child: Text(
                                       video.channelName ?? 'No Channel',
                                       style: textTheme.bodyLarge?.copyWith(
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? Colors.black
-                                            : Colors.white,
+                                        color: colorScheme.onSurface,
                                         fontWeight: FontWeight.w600,
                                         fontSize:
-                                            MediaQuery.of(context).size.width *
+                                            MediaQuery.sizeOf(context).width *
                                                 0.04,
                                       ),
                                       overflow: TextOverflow.ellipsis,
